@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
   font-size: calc(10px + 2vmin);
   width: 60%;
@@ -84,4 +84,21 @@ li {
     margin-left: 10px;
     margin-top: 0;
   }
+} */
+
+.blog-post{
+  display: flex;
+  margin: 30px 0px;
+}
+
+.post-image{
+  margin-right: 20px;
+}
+
+.categories{
+  margin: 40px 0px 0px 0px;
+}
+
+.blog-single p{
+  text-align: justify;
 }
