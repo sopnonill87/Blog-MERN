@@ -8,6 +8,7 @@ import {
   Button
 } from "react-bootstrap";
 import { NavLink, Link } from "react-router-dom";
+import Search from "./Search";
 
 export default function Navigation() {
   return (
@@ -40,10 +41,7 @@ export default function Navigation() {
             </Nav.Link>
           </Nav>
 
-          <Form inline>
-            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-            <Button variant="outline-light">Search</Button>
-          </Form>
+          <Search />
         </Container>
       </Navbar>
     </div>
