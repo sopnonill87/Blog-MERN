@@ -5,10 +5,12 @@ import {
   Nav,
   Form,
   FormControl,
-  Button
+  Button,
 } from "react-bootstrap";
 import { NavLink, Link } from "react-router-dom";
 import Search from "./Search";
+import SignInLink from "./Navigation/SignInLink";
+import SignOutLink from "./Navigation/SignOutLink";
 
 export default function Navigation() {
   return (
@@ -20,25 +22,8 @@ export default function Navigation() {
           </Navbar.Brand>
 
           <Nav className="mr-auto">
-            <Nav.Link as={NavLink} to="/">
-              Home
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/categories">
-              Categories
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/about">
-              About
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/login">
-              Login
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/register">
-              Register
-            </Nav.Link>
-            <Nav.Link href="#pricing">Logout</Nav.Link>
-            <Nav.Link as={NavLink} to="/dashboard">
-              Dashboard
-            </Nav.Link>
+            <SignInLink />
+            {/* <SignOutLink /> */}
           </Nav>
 
           <Search />

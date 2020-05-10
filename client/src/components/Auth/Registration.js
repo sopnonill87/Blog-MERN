@@ -8,6 +8,11 @@ const Registration = () => {
         <h3>Registration to the blog platform</h3>
         <Form>
           <Form.Group controlId="formBasicEmail">
+            <Form.Label>Name</Form.Label>
+            <Form.Control type="Name" placeholder="Enter your name" />
+          </Form.Group>
+
+          <Form.Group controlId="formBasicEmail">
             <Form.Label>Email</Form.Label>
             <Form.Control type="email" placeholder="Enter email" />
           </Form.Group>
