@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const apiRoutes = require("./routes/api");
 const categoryRoutes = require("./routes/category");
 const userRoutes = require("./routes/user");
+const postRoutes = require("./routes/post");
 const path = require("path");
 require("dotenv").config();
 
@@ -37,7 +38,7 @@ app.use(bodyParser.json());
 app.use("/todos", apiRoutes);
 app.use("/categories", categoryRoutes);
 app.use("/users", userRoutes);
-// app.use("/users", userRoutes);
+app.use("/posts", postRoutes);
 
 app.use((err, req, res, next) => {
   console.log(err);
