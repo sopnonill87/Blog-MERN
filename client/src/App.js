@@ -9,7 +9,7 @@ import Dashboard from "./components/Dashboard";
 import About from "./components/About";
 import Categories from "./components/Categories";
 //import Login from "./components/Auth/Login";
-import BlogDetails from "./components/BlogDetails";
+import BlogDetails from "./components/Blog/BlogDetails";
 //import Registration from "./components/Auth/Registration";
 
 import { Login, Registration } from "./components/Auth";
@@ -27,7 +27,7 @@ const App = () => {
           <Route exact path="/about" component={About} />
           <Route exact path="/categories" component={Categories} />
           <Route exact path="/dashboard" component={Dashboard} />
-          <Route exact path="/single" component={BlogDetails} />
+          <Route exact path="/post/:id" component={BlogDetails} />
         </Switch>
       </BrowserRouter>
     </div>

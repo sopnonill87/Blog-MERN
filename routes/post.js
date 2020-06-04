@@ -2,15 +2,15 @@ const express = require("express");
 const router = express.Router();
 const Post = require("../models/post");
 
-router.get("/", (req, res, next) => {
+router.get("/", (req, res) => {
   Post.find()
     .then((posts) => {
       res.json(posts);
     })
-    .catch(next);
+    .catch();
 });
 
-router.post("/", (req, res, next) => {
+router.post("/", (req, res) => {
   const author_id = req.body.author_id;
   const category_id = req.body.category_id;
   const title = req.body.title;
@@ -26,13 +26,13 @@ router.post("/", (req, res, next) => {
     .then((post) => {
       res.json(post);
     })
-    .catch(next);
+    .catch();
 });
 
-router.get("/:id", (req, res, next) => {
+router.get("/:id", (req, res) => {
   Post.findById(req.params.id)
     .then((post) => res.json(post))
-    .catch(next);
+    .catch();
 });
 
 module.exports = router;

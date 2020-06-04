@@ -15,3 +15,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.register-link {
+  display: inline !important;
+  padding-left: 0px !important;
+}

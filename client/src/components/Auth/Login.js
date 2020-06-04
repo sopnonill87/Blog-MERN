@@ -1,5 +1,6 @@
 import React from "react";
-import { Container, Form, Button } from "react-bootstrap";
+import { Container, Form, Button, Nav } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 
 const Login = () => {
   return (
@@ -17,8 +18,15 @@ const Login = () => {
             <Form.Control type="password" placeholder="Password" />
           </Form.Group>
 
+          <Form.Group controlId="formBasicEmail">
+            Don't register yet? Register{" "}
+            <Nav.Link as={NavLink} to="/register" className="register-link">
+              Here
+            </Nav.Link>
+          </Form.Group>
+
           <Button variant="primary" type="submit">
-            Submit
+            Login
           </Button>
         </Form>
       </Container>

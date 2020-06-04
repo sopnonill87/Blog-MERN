@@ -2,18 +2,18 @@ const express = require("express");
 const router = express.Router();
 const Todo = require("../models/todo");
 
-router.get("/", (req, res, next) => {
+router.get("/", (req, res) => {
   //this will return all the data, exposing only the id and action field to the client
   Todo.find({}, "action")
     .then((data) => res.json(data))
-    .catch(next);
+    .catch();
 });
 
-router.post("/", (req, res, next) => {
+router.post("/", (req, res) => {
   if (req.body.action) {
     Todo.create(req.body)
       .then((data) => res.json(data))
-      .catch(next);
+      .catch();
   } else {
     res.json({
       error: "The input field is empty",
@@ -21,10 +21,10 @@ router.post("/", (req, res, next) => {
   }
 });
 
-router.delete("/:id", (req, res, next) => {
+router.delete("/:id", (req, res) => {
   Todo.findOneAndDelete({ _id: req.params.id })
     .then((data) => res.json(data))
-    .catch(next);
+    .catch();
 });
 
 module.exports = router;

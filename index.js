@@ -5,6 +5,7 @@ const apiRoutes = require("./routes/api");
 const categoryRoutes = require("./routes/category");
 const userRoutes = require("./routes/user");
 const postRoutes = require("./routes/post");
+const authRoutes = require("./routes/auth");
 const path = require("path");
 require("dotenv").config();
 
@@ -39,11 +40,12 @@ app.use("/todos", apiRoutes);
 app.use("/categories", categoryRoutes);
 app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
+app.use("/auth", authRoutes);
 
-app.use((err, req, res, next) => {
-  console.log(err);
-  next();
-});
+// app.use((err, req, res) => {
+//   console.log(err);
+//   //next();
+// });
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
