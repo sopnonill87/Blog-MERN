@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import Todo from "./components/Todo";
 import "./App.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
@@ -11,10 +11,18 @@ import Categories from "./components/Categories";
 //import Login from "./components/Auth/Login";
 import BlogDetails from "./components/Blog/BlogDetails";
 //import Registration from "./components/Auth/Registration";
+import { loadUser } from "./actions/authActions";
 
 import { Login, Registration } from "./components/Auth";
 
 const App = () => {
+  // const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(loadUser());
+  //   console.log("loaded for the first time");
+  // }, []);
+
   return (
     <div className="App">
       <BrowserRouter>

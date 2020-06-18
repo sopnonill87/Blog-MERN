@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { fetchPosts } from "../actions/postsActions";
 import { fetchCategories } from "../actions/categoriesActions";
 import { Container, Row, Col, ListGroup } from "react-bootstrap";
 import { BlogList, BlogTitle } from "./Blog";
-import Paginate from "./Paginate";
+// import Paginate from "./Paginate";
 
 const Home = ({ dispatch, loading, posts, categories, hasErrors }) => {
   useEffect(() => {
@@ -35,7 +36,7 @@ const Home = ({ dispatch, loading, posts, categories, hasErrors }) => {
                   posts.slice(0, 5).map((post) => {
                     return (
                       <ListGroup.Item key={post._id}>
-                        {post.title}
+                        <Link to={"/post/" + post._id}>{post.title}</Link>
                       </ListGroup.Item>
                     );
                   })}
@@ -48,7 +49,9 @@ const Home = ({ dispatch, loading, posts, categories, hasErrors }) => {
                 {categories.map((category) => {
                   return (
                     <ListGroup.Item key={category._id}>
-                      {category.name}
+                      <Link to={"/categories/" + category._id + "/posts"}>
+                        {category.name}
+                      </Link>
                     </ListGroup.Item>
                   );
                 })}

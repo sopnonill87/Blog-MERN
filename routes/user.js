@@ -13,10 +13,7 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  const name = req.body.name;
-  const email = req.body.email;
-  const password = bcrypt.hashSync(req.body.password, saltRounds);
-  //const password = req.password;
+  const { name, email, password } = req.body;
 
   // Simple validation
   if (!name || !email || !password) {
@@ -35,28 +32,38 @@ router.post("/", (req, res) => {
       password: password,
     });
 
-    newUser
-      .save()
-      .then((user) => {
-        jwt.sign(
-          { id: user._id },
-          config.get("jwt_secret"),
-          { expiresIn: 3600 },
-          (err, token) => {
-            if (err) throw err;
+    //Create salt and hash
 
-            res.json({
-              token: token,
-              user: {
-                id: user._id,
-                name: user.name,
-                email: user.email,
-              },
-            });
-          }
-        );
-      })
-      .catch();
+    bcrypt.genSalt(saltRounds, function (err, salt) {
+      bcrypt.hash(newUser.password, salt, function (err, hash) {
+        if (err) throw err;
+        newUser.password = hash;
+
+        newUser
+          .save()
+          .then((user) => {
+            //console.log("user from register api:", user);
+            jwt.sign(
+              { id: user._id },
+              config.get("jwt_secret"),
+              { expiresIn: 3600 },
+              (err, token) => {
+                if (err) throw err;
+
+                res.json({
+                  token: token,
+                  user: {
+                    id: user._id,
+                    name: user.name,
+                    email: user.email,
+                  },
+                });
+              }
+            );
+          })
+          .catch();
+      });
+    });
   });
 });
 

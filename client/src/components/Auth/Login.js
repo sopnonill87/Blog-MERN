@@ -5,17 +5,27 @@ import { NavLink } from "react-router-dom";
 const Login = () => {
   return (
     <div>
-      <Container style={{ marginTop: "20px" }}>
+      <Container
+        style={{
+          marginTop: "20px",
+          padding: "20px",
+          border: "1px solid #ced4da",
+          borderRadius: ".25rem",
+        }}>
         <h3>Login to add post</h3>
         <Form>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" />
+            <Form.Control type="email" name="email" placeholder="Enter email" />
           </Form.Group>
 
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" />
+            <Form.Control
+              type="password"
+              name="password"
+              placeholder="Password"
+            />
           </Form.Group>
 
           <Form.Group controlId="formBasicEmail">

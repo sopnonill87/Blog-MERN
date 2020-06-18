@@ -1,31 +1,95 @@
-import React from "react";
+import React, { useState } from "react";
+import { connect, useDispatch } from "react-redux";
 import { Container, Form, Button, Nav } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import { register } from "../../actions/authActions";
 
 const Registration = () => {
+  const dispatch = useDispatch();
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  // const [isLoading, setIsLoading] = React.useState(false);
+  const [hasPasswordError, setHasPasswordError] = useState(false);
+
+  const registerHandler = (e) => {
+    e.preventDefault();
+
+    if (password != confirmPassword) {
+      setHasPasswordError(true);
+    }
+    //console.log("after register form submit:", name, email, password);
+    const newUser = {
+      name,
+      email,
+      password,
+    };
+
+    dispatch(register(newUser));
+  };
+
   return (
     <div>
-      <Container style={{ marginTop: "20px" }}>
+      <Container
+        style={{
+          marginTop: "20px",
+          padding: "20px",
+          border: "1px solid #ced4da",
+          borderRadius: ".25rem",
+        }}>
         <h3>Register to the blog platform</h3>
-        <Form>
+
+        {hasPasswordError ? (
+          <p className="alert alert-danger">
+            Password and confirm password didn't match
+          </p>
+        ) : null}
+
+        <Form onSubmit={registerHandler}>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Name</Form.Label>
-            <Form.Control type="Name" placeholder="Enter your name" />
+            <Form.Control
+              type="Name"
+              name="name"
+              placeholder="Enter your name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
           </Form.Group>
 
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" />
+            <Form.Control
+              type="email"
+              name="email"
+              value={email}
+              placeholder="Enter email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </Form.Group>
 
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" />
+            <Form.Control
+              type="password"
+              name="password"
+              value={password}
+              placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </Form.Group>
 
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Confirm Password</Form.Label>
-            <Form.Control type="password" placeholder="Confirm Password" />
+            <Form.Control
+              type="password"
+              name="confirm-password"
+              value={confirmPassword}
+              placeholder="Confirm Password"
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
           </Form.Group>
 
           <Form.Group controlId="formBasicEmail">
@@ -44,4 +108,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default connect(null, { register })(Registration);

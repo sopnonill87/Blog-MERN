@@ -18,7 +18,7 @@ const BlogList = (posts, loading, hasErrors) => {
           <Link to={"/post/" + post._id}>
             <h3>{post.title}</h3>
           </Link>
-          <p>{post.body}</p>
+          <p>{post.body.substr(0, 300) + "..."}</p>
         </div>
       </div>
     ));
