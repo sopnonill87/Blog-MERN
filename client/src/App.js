@@ -8,25 +8,25 @@ import Home from "./components/Home";
 import Dashboard from "./components/Dashboard";
 import About from "./components/About";
 import Categories from "./components/Categories";
-//import Login from "./components/Auth/Login";
 import BlogDetails from "./components/Blog/BlogDetails";
-//import Registration from "./components/Auth/Registration";
 import { loadUser } from "./actions/authActions";
-
 import { Login, Registration } from "./components/Auth";
+import { connect } from "react-redux";
 
-const App = () => {
-  // const dispatch = useDispatch();
+const App = ({ auth }) => {
+  const { isAuthenticated, user } = auth;
+  //console.log("authentication:", isAuthenticated);
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(loadUser());
-  //   console.log("loaded for the first time");
-  // }, []);
+  useEffect(() => {
+    dispatch(loadUser());
+    console.log("loaded for the first time");
+  }, []);
 
   return (
     <div className="App">
       <BrowserRouter>
-        <Navigation />
+        <Navigation isAuthenticated={isAuthenticated} user={user} />
 
         <Switch>
           <Route exact path="/" component={Home} />
@@ -36,10 +36,15 @@ const App = () => {
           <Route exact path="/categories" component={Categories} />
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/post/:id" component={BlogDetails} />
+          {/* <Route exact path="/logout" component={Logout} /> */}
         </Switch>
       </BrowserRouter>
     </div>
   );
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps)(App);

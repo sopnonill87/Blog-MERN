@@ -24,13 +24,21 @@ export default function authReducer(state = initialState, action) {
       };
 
     case actions.LOGIN_SUCCESS:
-    case actions.REGISTER_SUCCESS:
-      console.log("payload from register success reducer: ", action.payload);
       localStorage.setItem("token", action.payload.token);
       return {
         ...state,
         ...action.payload,
         isAuthenticated: true,
+        isLoading: false,
+      };
+
+    case actions.REGISTER_SUCCESS:
+      //console.log("payload from register success reducer: ", action.payload);
+      localStorage.setItem("token", action.payload.token);
+      return {
+        ...state,
+        ...action.payload,
+        isAuthenticated: false,
         isLoading: false,
       };
 

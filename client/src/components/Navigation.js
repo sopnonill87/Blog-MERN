@@ -12,7 +12,7 @@ import Search from "./Search";
 import SignInLink from "./Navigation/SignInLink";
 import SignOutLink from "./Navigation/SignOutLink";
 
-export default function Navigation() {
+const Navigation = ({ isAuthenticated, user }) => {
   return (
     <div>
       <Navbar expand="lg" bg="primary" variant="dark">
@@ -22,8 +22,7 @@ export default function Navigation() {
           </Navbar.Brand>
 
           <Nav className="mr-auto">
-            <SignInLink />
-            {/* <SignOutLink /> */}
+            {isAuthenticated ? <SignOutLink /> : <SignInLink />}
           </Nav>
 
           <Search />
@@ -31,4 +30,6 @@ export default function Navigation() {
       </Navbar>
     </div>
   );
-}
+};
+
+export default Navigation;

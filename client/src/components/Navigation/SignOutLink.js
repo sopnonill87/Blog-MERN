@@ -8,8 +8,18 @@ import {
   Button,
 } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import { connect, useDispatch } from "react-redux";
+import { logout } from "../../actions/authActions";
 
 const SignOutLink = () => {
+  const dispatch = useDispatch();
+
+  const logoutHandler = (e) => {
+    e.preventDefault();
+    // console.log("logout handler");
+
+    dispatch(logout());
+  };
   return (
     <>
       <Nav.Link as={NavLink} to="/">
@@ -24,9 +34,11 @@ const SignOutLink = () => {
         Dashboard
       </Nav.Link>
 
-      <Nav.Link href="#pricing">Logout</Nav.Link>
+      <Nav.Link as={NavLink} onClick={logoutHandler} to="/">
+        Logout
+      </Nav.Link>
     </>
   );
 };
 
-export default SignOutLink;
+export default connect(null, { logout })(SignOutLink);

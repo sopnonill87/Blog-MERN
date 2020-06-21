@@ -1,8 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
+import { connect, useDispatch } from "react-redux";
 import { Container, Form, Button, Nav } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import { login } from "../../actions/authActions";
 
 const Login = () => {
+  const dispatch = useDispatch();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const loginHandler = (e) => {
+    e.preventDefault();
+
+    const user = {
+      email,
+      password,
+    };
+
+    //console.log("user info:", user);
+
+    dispatch(login(user));
+  };
+
   return (
     <div>
       <Container
@@ -13,10 +33,16 @@ const Login = () => {
           borderRadius: ".25rem",
         }}>
         <h3>Login to add post</h3>
-        <Form>
+        <Form onSubmit={loginHandler}>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email</Form.Label>
-            <Form.Control type="email" name="email" placeholder="Enter email" />
+            <Form.Control
+              type="email"
+              name="email"
+              value={email}
+              placeholder="Enter email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </Form.Group>
 
           <Form.Group controlId="formBasicPassword">
@@ -24,7 +50,9 @@ const Login = () => {
             <Form.Control
               type="password"
               name="password"
+              value={password}
               placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>
 
@@ -44,4 +72,10 @@ const Login = () => {
   );
 };
 
-export default Login;
+const mapStateToProps = (state) => ({
+  loading: state.posts.loading,
+  isAuthenticated: state.auth.isAuthenticated,
+  hasErrors: state.posts.hasErrors,
+});
+
+export default connect(mapStateToProps, { login })(Login);
