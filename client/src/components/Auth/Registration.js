@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { connect, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Container, Form, Button, Nav } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { register } from "../../actions/authActions";
 
 const Registration = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -28,6 +29,7 @@ const Registration = () => {
     };
 
     dispatch(register(newUser));
+    history.push("/");
   };
 
   return (
@@ -38,7 +40,8 @@ const Registration = () => {
           padding: "20px",
           border: "1px solid #ced4da",
           borderRadius: ".25rem",
-        }}>
+        }}
+      >
         <h3>Register to the blog platform</h3>
 
         {hasPasswordError ? (
@@ -108,4 +111,4 @@ const Registration = () => {
   );
 };
 
-export default connect(null, { register })(Registration);
+export default Registration;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { connect, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Container, Form, Button, Nav } from "react-bootstrap";
 import { NavLink, useHistory } from "react-router-dom";
 import { login } from "../../actions/authActions";
@@ -7,6 +7,10 @@ import { login } from "../../actions/authActions";
 const Login = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const loading = useSelector((state) => state.posts.loading);
+  const hasErrors = useSelector((state) => state.posts.hasErrors);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,7 +23,7 @@ const Login = () => {
       password,
     };
 
-    //console.log("user info:", user);
+    console.log("user info:", user);
 
     dispatch(login(user));
     history.push("/");
@@ -33,7 +37,8 @@ const Login = () => {
           padding: "20px",
           border: "1px solid #ced4da",
           borderRadius: ".25rem",
-        }}>
+        }}
+      >
         <h3>Login to add post</h3>
         <Form onSubmit={loginHandler}>
           <Form.Group controlId="formBasicEmail">
@@ -74,10 +79,4 @@ const Login = () => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  loading: state.posts.loading,
-  isAuthenticated: state.auth.isAuthenticated,
-  hasErrors: state.posts.hasErrors,
-});
-
-export default connect(mapStateToProps, { login })(Login);
+export default Login;

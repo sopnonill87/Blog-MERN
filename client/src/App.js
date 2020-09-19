@@ -10,7 +10,7 @@ import Categories from "./components/Categories";
 import BlogDetails from "./components/Blog/BlogDetails";
 import { loadUser } from "./actions/authActions";
 import { Login, Registration } from "./components/Auth";
-import { connect, useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import CategoryPosts from "./components/CategoryPosts";
 
 const App = () => {
@@ -20,9 +20,9 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loadUser());
+    //dispatch(loadUser());
     console.log("loaded for the first time");
-  }, [dispatch]);
+  }, []);
 
   return (
     <div className="App">

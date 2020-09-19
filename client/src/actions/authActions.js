@@ -40,17 +40,17 @@ export function loadUser() {
     //If token, add to headers
     if (token) {
       config.headers["x-auth-token"] = token;
-    }
 
-    try {
-      const response = await fetch(`http://localhost:5000/auth/user`);
-      const data = await response.json();
-      //console.log("user from api:", data);
+      try {
+        const response = await fetch(`http://localhost:5000/auth/user`);
+        const data = await response.json();
+        //console.log("user from api:", data);
 
-      dispatch(getUserSuccess(data));
-    } catch (error) {
-      console.log("Error from auth action");
-      dispatch(getUserFailure());
+        dispatch(getUserSuccess(data));
+      } catch (error) {
+        console.log("Error from auth action");
+        dispatch(getUserFailure());
+      }
     }
   };
 }
@@ -100,6 +100,7 @@ export const login = ({ email, password }) => async (dispatch) => {
   //console.log("from login action:", email, password);
 
   const body = JSON.stringify({ email: email, password: password });
+  console.log("body from login action:", body);
 
   try {
     const response = await fetch(`http://localhost:5000/auth`, {
