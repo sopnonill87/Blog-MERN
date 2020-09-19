@@ -1,0 +1,30 @@
+1. Video Upload
+  - Encrypted (Tooltip with a link details for DRM pricing)
+  - Non Encrypted
+
+  #Encrypted:
+    - If a user choose to upload video encrypted way, then the video should be saved in vdocipher
+
+  #Non Encrypted:
+    - If a user choose to upload video non encrypted way, then the video should be saved in aws s3 bucket.
+
+
+2. Video Preview for both instructor and super admin:
+  #Encrypted:
+    - If the video is encrypted, then use vdo cipher api and preview with their embedded player.
+
+  P.S: 
+  If the video is encrypted, when an instructor or super admin will want to preview the video, the bandwidth will count.
+  We need to optimize this.
+  
+  #Non Encrypted:
+    - If the video is not encrypted, then use video js player to preview the video.
+
+3. Video delete option for super admin:
+  - If any instructor wants to remove video, s/he needs to inform super admin. Then super admin can delete the video.
+
+4. SSL Commerz payment:
+  - Add instructor info in the invoice in SSL Commerz payment.
+
+
+

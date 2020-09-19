@@ -12,7 +12,9 @@ import Search from "./Search";
 import SignInLink from "./Navigation/SignInLink";
 import SignOutLink from "./Navigation/SignOutLink";
 
-const Navigation = ({ isAuthenticated, user }) => {
+const Navigation = ({ isAuthenticated }) => {
+  console.log("user check:", isAuthenticated);
+
   return (
     <div>
       <Navbar expand="lg" bg="primary" variant="dark">

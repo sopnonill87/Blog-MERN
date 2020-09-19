@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import { connect, useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchPosts } from "../actions/postsActions";
 import { fetchCategories } from "../actions/categoriesActions";
@@ -7,15 +7,18 @@ import { Container, Row, Col, ListGroup } from "react-bootstrap";
 import { BlogList, BlogTitle } from "./Blog";
 // import Paginate from "./Paginate";
 
-const Home = ({ dispatch, loading, posts, categories, hasErrors }) => {
+const Home = () => {
+  const posts = useSelector((state) => state.posts.posts);
+  const categories = useSelector((state) => state.category.categories);
+  const loading = useSelector((state) => state.posts.loading);
+  const hasErrors = useSelector((state) => state.posts.hasErrors);
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchPosts());
     dispatch(fetchCategories());
   }, [dispatch]);
-
-  // useEffect(() => {
-  //   dispatch(fetchCategories());
-  // }, [dispatch]);
 
   //console.log("posts from home:", posts);
 
@@ -64,10 +67,4 @@ const Home = ({ dispatch, loading, posts, categories, hasErrors }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  loading: state.posts.loading,
-  posts: state.posts.posts,
-  categories: state.category.categories,
-  hasErrors: state.posts.hasErrors,
-});
-export default connect(mapStateToProps)(Home);
+export default Home;

@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
@@ -11,17 +10,19 @@ import Categories from "./components/Categories";
 import BlogDetails from "./components/Blog/BlogDetails";
 import { loadUser } from "./actions/authActions";
 import { Login, Registration } from "./components/Auth";
-import { connect } from "react-redux";
+import { connect, useSelector, useDispatch } from "react-redux";
+import CategoryPosts from "./components/CategoryPosts";
 
-const App = ({ auth }) => {
-  const { isAuthenticated, user } = auth;
-  //console.log("authentication:", isAuthenticated);
+const App = () => {
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const user = useSelector((state) => state.auth.user);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(loadUser());
     console.log("loaded for the first time");
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="App">
@@ -36,6 +37,7 @@ const App = ({ auth }) => {
           <Route exact path="/categories" component={Categories} />
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/post/:id" component={BlogDetails} />
+          <Route exact path="/categories/:id/posts" component={CategoryPosts} />
           {/* <Route exact path="/logout" component={Logout} /> */}
         </Switch>
       </BrowserRouter>
@@ -43,8 +45,4 @@ const App = ({ auth }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-});
-
-export default connect(mapStateToProps)(App);
+export default App;

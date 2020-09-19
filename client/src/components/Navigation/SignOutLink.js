@@ -41,4 +41,4 @@ const SignOutLink = () => {
   );
 };
 
-export default connect(null, { logout })(SignOutLink);
+export default SignOutLink;

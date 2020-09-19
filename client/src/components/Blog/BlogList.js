@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 import BlogThumb from "./BlogThumb";
 
 const BlogList = (posts, loading, hasErrors) => {
-  // const { blogPosts } = posts;
-  //console.log(posts.posts);
+  //console.log("posts: ", posts);
 
   const renderPosts = () => {
     // if (loading) return <p>Loading posts...</p>;

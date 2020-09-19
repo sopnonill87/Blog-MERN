@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import { Container, Form, Button, Nav } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { login } from "../../actions/authActions";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,6 +22,7 @@ const Login = () => {
     //console.log("user info:", user);
 
     dispatch(login(user));
+    history.push("/");
   };
 
   return (

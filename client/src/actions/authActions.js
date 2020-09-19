@@ -28,6 +28,7 @@ export function loadUser() {
 
     //Get token from localstorage
     const token = getState().auth.token;
+    console.log("load user token check:", token);
 
     //Headers
     const config = {
@@ -44,7 +45,7 @@ export function loadUser() {
     try {
       const response = await fetch(`http://localhost:5000/auth/user`);
       const data = await response.json();
-      console.log("user from api:", data);
+      //console.log("user from api:", data);
 
       dispatch(getUserSuccess(data));
     } catch (error) {
